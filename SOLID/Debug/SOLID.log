@@ -1,2 +1,4 @@
 ﻿  testApp.c
+c:\users\progamercode\desktop\git\solid\solid\f0700.h(89): warning C4047: '=': 'int *' differs in levels of indirection from 'int **'
+c:\users\progamercode\desktop\git\solid\solid\f0700.h(73): warning C4101: 'a2a': unreferenced local variable
   SOLID.vcxproj -> C:\Users\ProGamerCode\Desktop\GIT\SOLID\Debug\SOLID.exe
