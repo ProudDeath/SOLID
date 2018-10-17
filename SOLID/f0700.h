@@ -23,10 +23,10 @@
 //         - eliminate unnecessary variables/loop/calculation
 //         - keep it super simple, DON'T write code that only hardcore 
 //           programmers can understand; DO write high level code that 
-//           every programmers one can read
+//           every programmer can read
 //
 //    2. What strategy would you use to verify that your code is correct?
-//		 Adding a seperate project for unit testing
+//		  unit testing
 //    3. Explain what the code is trying to accomplish intuitively
 //
 //    4. Please show us how you accomplish all #1, #2, #3:
@@ -41,7 +41,33 @@
 // ********************************************************************
 
 
-signed int __cdecl f0700(const int a1, int a2[], const int a3, int *a4[])
+////////////////////////////////////////////////////////////////////////////
+/**************************************************************************
+ **_________________________!!!!EXPLAINATION!!!!_________________________**
+ **                                                                      **
+ ** 2. What strategy would you use to verify that your code is correct?  **
+ **     unit testing using defined C style try catch and breakpoints     **
+ **                                                                      **
+ ** 3. Explain what the code is trying to accomplish intuitively         **
+ **    The code seems 2 be dealing with encryption due 2 a1 precondtion  **
+ **                                                                      **
+ **                                                                      **
+ *************************************************************************/
+ /////////////////////////////////////////////////////////////////////////
+
+
+//standard C format
+signed int
+oddDecr(int res)
+{
+	if (res % 2)
+	{
+		--res;
+	}
+	return res;
+}
+signed int __cdecl 
+f0700(const int a1, const int unsigned a2[], const int a3, int *a4[])
 {
 	// Pre-Condition:
 	//    a1: possible input value = [64, 128, 256]
@@ -58,73 +84,107 @@ signed int __cdecl f0700(const int a1, int a2[], const int a3, int *a4[])
 	//    a4: value can change
 
 
-	int *v4;
 	
-	int v6;
+	//renamed v6 to i
+	int i = 0;
+	//renamed v9 to invert one
+	int invrt1 = -1;
+	//renamed v12 to value one
+	int val1 = (int)&a2[i];
+	//renamed
+	int val2 = (int)&a2[i++];
+	int result = 0;
+
 	
-	int result;
-	int v9;
-	int *v10;
-	int v11;
-	int v12;
-	int v13;
 	//not needed variables
+	//int *v4;
 	//int v5;
 	//int v7;
 	//int v14;
 	//int v15;
 	//int a2a;
-
+	//int v13;
+	//int v11;
 	
 	//not needed placeholders
 	//v5 = a1;
 	//v7 = a2[a1];
 	//v14 = a2[a1 - 1];
 	//v15 = v7;
-	v4 = a2;
-	v6 = 0;
-	result = 0;
-	v9 = -1;
-	a2[a1 - 1] = 10000;
-
-	a2[a1] = -10000;
+	//v4 = a2;
+	//v6 = 0;
+	//result = 0;
 	
 
-	if (a1 > 0)
+	//prototype forloop
+	for (i; a1 > 0 && i < a1; ++i)
 	{
-		v10 = a4;
+	
+		if (invrt1 * a2[i++] - a2[i] < a3)
+		{
+			do
+			{
+				if (invrt1 * val1 > invrt1 * val2)
+
+					val2 = val1;
+
+
+				val1 += 4;
+				++i;
+
+			} while (invrt1 * val2 - (val1 + 4) < a3);
+		}
+		++val2;
+		invrt1 = -invrt1;
+		//simplified reassignment
+		result = result + 2;
+	
+	}
+	/*
+	// comment out code for removal
+if (a1 > 0)
+	{
+		//unnessesary assignment
+		//v10 = a4;
 		do
 		{
-			v11 = (int)&v4[v6++];
-			*v10 = v11;
-			v12 = (int)&v4[v6];
-			if (v9 * (*(int *)v11 - *(int *)v12) < a3)
+			
+			*v10 = (int)&a2[i++];
+			v12 = (int)&a2[i];
+			if (invrt1 * a2[i++] - a2[i] < a3)
 			{
 				do
 				{
-					if (v9 * *(int *)v12 > v9 * *(int *)*v10)
+					if (invrt1 * *(int *)v12 > invrt1 * *(int *)*v10) 
+					
 						*v10 = v12;
-					v13 = *(int *)(v12 + 4);
-					v12 += 4;
-					++v6;
-				} while (v9 * (*(int *)*v10 - v13) < a3);
+
+						 
+						v12 += 4;
+						++i;
+					
+				} while (invrt1 * (*(int *)*v10 - v12 + 4) < a3);
 				//a1 is const
 				//v5 = a1;
 			}
 			++v10;
-			v9 = -v9;
+			invrt1 = -invrt1;
+			//simplified reassignment
 			result = result + 2;
-		} while (v6 < a1);
+		} while (i < a1);
 	}
+
 	//if result is even decrement it by 1
 	if (result % 2)
 		--result;
-	/*
+	
 	//omit unneeded assignments
 	v4[v5 - 1] = v14;
 	v4[v5] = v15;
 	*/
-	return result;
+	
+	//encapsulate/distribute responsibility
+	return oddDecr(result);
 }
 
 #endif

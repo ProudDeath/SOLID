@@ -18,6 +18,9 @@
     <ClInclude Include="f0700.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="f0700Legacy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="testApp.c">
